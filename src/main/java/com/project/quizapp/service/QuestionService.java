@@ -4,8 +4,11 @@ import com.project.quizapp.model.questions;
 import com.project.quizapp.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,16 +17,16 @@ public class QuestionService {
     @Autowired
     QuestionRepository questionRepository;
     public List<questions> getAllQuestion() {
-        return questionRepository.findAll(Sort.by("id"));
+            return questionRepository.findAll(Sort.by("id"));
     }
 
     public List<questions> getCategoryBasedQuestion(String category) {
-        return questionRepository.findByCategory(category);
+            return questionRepository.findByCategory(category);
+
     }
 
-    public String addQuestion(questions questions) {
+    public void addQuestion(questions questions) {
         questionRepository.save(questions);
-        return "Added question successfully";
     }
 
     public List<questions> getCategoryBasedQuestionAndLevel(String category, String level) {
